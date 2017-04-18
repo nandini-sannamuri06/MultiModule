@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply from: '../gradle/uploadarchives.gradle'
+
+sourceCompatibility = 1.8
+
+
+dependencies {
+    compile(
+            'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-starter-thymeleaf'
+    )
+
+    testCompile(
+            'org.springframework:spring-test:4.1.5.RELEASE',
+            "org.hamcrest:hamcrest-all:$hamcrestVersion",
+            'com.nitorcreations:junit-runners:1.2',
+            'org.springframework.boot:spring-boot-starter-test'
+    )
+
+    testCompile("junit:junit:$junitVersion") {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+
+    testCompile("org.mockito:mockito-core:$mockitoVersion") {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+}
